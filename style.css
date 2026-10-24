@@ -1,0 +1,266 @@
+/* Базовые настройки */
+:root {
+    color-scheme: dark;
+    --page-bg: #101216;
+    --panel-bg: #171a20;
+    --panel-hover: #242831;
+    --border: #292d36;
+    --text: #f2f3f5;
+    --muted: #9ba2af;
+    --accent: #66d9a5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background: var(--page-bg);
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(66, 83, 105, 0.13), transparent 55%),
+        var(--page-bg);
+    color: var(--text);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+/* Верхняя панель */
+.topbar {
+    width: 100%;
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    background: rgba(16, 18, 22, 0.88);
+}
+
+.navigation {
+    width: min(1120px, calc(100% - 48px));
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-button {
+    border: 0;
+    border-radius: 7px;
+    padding: 11px 14px;
+    background: transparent;
+    color: #c8cbd2;
+    font: inherit;
+    font-size: 14px;
+    cursor: default;
+    transition: background-color 180ms ease, color 180ms ease;
+}
+
+.nav-button:hover {
+    background: var(--panel-hover);
+    color: #fff;
+}
+
+/* Основная область */
+.main-content {
+    width: min(920px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 76px 0 88px;
+    flex: 1;
+}
+
+.intro {
+    margin-bottom: 46px;
+    opacity: 0;
+    transform: translateY(24px);
+}
+
+.eyebrow {
+    margin: 0 0 14px;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+    font-weight: 800;
+}
+
+.subtitle {
+    margin: 16px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Список испытаний */
+.challenges {
+    opacity: 0;
+    transform: translateY(24px);
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.section-heading h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.challenge-count {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.challenge-list {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(23, 26, 32, 0.78);
+}
+
+.challenge-row {
+    padding: 20px 22px;
+    border-bottom: 1px solid var(--border);
+    transition: background-color 160ms ease;
+}
+
+.challenge-row:last-child {
+    border-bottom: 0;
+}
+
+.challenge-row:hover {
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.challenge-info {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.challenge-info h3 {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 750;
+}
+
+.points {
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+.players {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.players span {
+    margin: 0 5px;
+    color: #535b68;
+}
+
+/* Нижняя панель */
+.footer {
+    min-height: 64px;
+    padding: 18px max(24px, calc((100% - 1120px) / 2));
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    color: #858c98;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    background: rgba(16, 18, 22, 0.88);
+}
+
+/* Плавное появление снизу */
+body.is-loaded .intro,
+body.is-loaded .challenges {
+    animation: rise-in 700ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+body.is-loaded .challenges {
+    animation-delay: 130ms;
+}
+
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Компактное отображение на телефонах */
+@media (max-width: 600px) {
+    .topbar {
+        padding: 8px 0;
+    }
+
+    .navigation {
+        width: calc(100% - 24px);
+        gap: 2px;
+        flex-wrap: wrap;
+    }
+
+    .nav-button {
+        padding: 10px 9px;
+        font-size: 12px;
+    }
+
+    .main-content {
+        width: calc(100% - 28px);
+        padding: 52px 0 64px;
+    }
+
+    .intro {
+        margin-bottom: 34px;
+    }
+
+    .challenge-row {
+        padding: 17px 15px;
+    }
+
+    .footer {
+        padding-right: 18px;
+        padding-left: 18px;
+    }
+}
